@@ -1,4 +1,4 @@
-/**
+package com.inu; /**
  * Created by potato on 2016/8/11.
  */
 import java.io.Reader;
@@ -9,8 +9,9 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import com.inu.mybatis.model.*;
+import org.junit.Test;
 
-public class testMybatis {
+public class TestMybatis {
     private static SqlSessionFactory sqlSessionFactory;
     private static Reader reader;
 
@@ -25,11 +26,10 @@ public class testMybatis {
     public static SqlSessionFactory getSession() {
         return sqlSessionFactory;
     }
-    /**
-     * @param args
-     */
-    public static void main(String[] args) {
-        // TODO Auto-generated method stub
+
+
+    @Test
+    public void testUser() {
         SqlSession session = sqlSessionFactory.openSession();
         try {
             User user = (User) session.selectOne(

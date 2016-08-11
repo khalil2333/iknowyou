@@ -14,7 +14,7 @@ public interface IUserService {
      * @param message
      * @param time
      */
-    public void insertUserMessage(String openId, String message, Long time);
+    public boolean insertUserMessage(String openId, String message, Long time);
 
 
     /**

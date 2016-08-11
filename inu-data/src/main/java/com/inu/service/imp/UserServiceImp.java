@@ -22,7 +22,8 @@ public class UserServiceImp implements IUserService{
         return historyMoodDTOList;
     }
 
-    public void insertUserMessage(String openId, String message, Long time) {
+    public boolean insertUserMessage(String openId, String message, Long time) {
+        return true;
     }
 
 }
