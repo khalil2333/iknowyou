@@ -32,4 +32,8 @@ public class ConfigInfo extends Properties {
     public String TXSecretKey(){
         return getProperty("TX_SecretKey");
     }
+
+    public String getWXDevelopName(){
+        return getProperty("WX_DeveloperName");
+    }
 }

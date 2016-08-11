@@ -43,7 +43,9 @@ public class PStreamContext {
     }
 
     public Object getAttribute(String name){
-        return attributes.get(name);
+        ContextAttribute attr = attributes.get(name);
+
+        return attr.getData();
     }
 
     public PStream getParent() {

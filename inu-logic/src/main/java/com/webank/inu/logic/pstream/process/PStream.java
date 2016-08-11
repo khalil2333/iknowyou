@@ -3,6 +3,7 @@ package com.webank.inu.logic.pstream.process;
 import com.webank.inu.logic.pstream.context.PStreamContext;
 import com.webank.inu.logic.pstream.handler.AsynPStreamHandler;
 import com.webank.inu.logic.pstream.handler.HandleFinishListener;
+import com.webank.inu.logic.pstream.handler.StreamFinishListener;
 import com.webank.inu.logic.pstream.handler.SynPStreamHandler;
 
 import java.util.concurrent.atomic.AtomicInteger;
@@ -30,8 +31,9 @@ public class PStream {
         return handleNum.get() == 0;
     }
 
-    public void synFinish(){
-        while(!isFinish());
+    public Object synFinish(StreamFinishListener listener){
+        while(!isFinish()) System.out.println("....");
+        return listener.actionFinish(context);
     }
 
     public void addHandler(SynPStreamHandler handler){
@@ -64,14 +66,14 @@ public class PStream {
                 handleNum.getAndDecrement();
             }else{
                 final AsynPStreamHandler pStreamHandler = tmp.getAsynPStreamHandler();
-                final Object finalFromData = fromData;
+                final Object[] finalFromData = {fromData};
                 Thread thread = new Thread(new Runnable() {
                     public void run() {
-                        pStreamHandler.handle(context, finalFromData);
+                        finalFromData[0] = pStreamHandler.handle(context, finalFromData[0]);
                     }
                 });
                 thread.start();
-                fromData = null;
+                fromData = finalFromData[0];
             }
             tmp = tmp.next;
         }
