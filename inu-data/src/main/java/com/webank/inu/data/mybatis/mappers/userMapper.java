@@ -5,6 +5,6 @@ import com.webank.inu.data.mybatis.model.User;
 /**
  * Created by potato on 2016/8/11.
  */
-public interface userMapper {
+public interface UserMapper {
     public User getUser(int id);
 }

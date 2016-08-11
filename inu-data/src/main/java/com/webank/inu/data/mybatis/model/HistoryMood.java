@@ -1,12 +1,14 @@
 package com.webank.inu.data.mybatis.model;
 
+import java.sql.Timestamp;
+
 /**
  * Created by potato on 2016/8/11.
  */
 public class HistoryMood {
     public int id;
-    int openId;
-    Long time;
+    String openId;
+    Timestamp time;
     String message;
 
     public int getId() {
@@ -17,19 +19,19 @@ public class HistoryMood {
         this.id = id;
     }
 
-    public int getOpenId() {
+    public String getOpenId() {
         return openId;
     }
 
-    public void setOpenId(int openId) {
+    public void setOpenId(String openId) {
         this.openId = openId;
     }
 
-    public Long getTime() {
+    public Timestamp getTime() {
         return time;
     }
 
-    public void setTime(Long time) {
+    public void setTime(Timestamp time) {
         this.time = time;
     }
 
