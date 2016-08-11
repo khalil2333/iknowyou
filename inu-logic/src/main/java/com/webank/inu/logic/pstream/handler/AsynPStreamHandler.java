@@ -7,7 +7,7 @@ import com.webank.inu.logic.pstream.context.PStreamContext;
  */
 public interface AsynPStreamHandler {
 
-    public void handle(PStreamContext context,Object fromData);
+    public Object handle(PStreamContext context,Object fromData);
 
     public HandleFinishListener getFinishListener();
 

@@ -7,11 +7,12 @@ import com.webank.inu.logic.pstream.context.PStreamContext;
  */
 public abstract class AsynPStreamHandlerAdapter implements AsynPStreamHandler {
     
-    public abstract void handleCore(PStreamContext context,Object fromData);
+    public abstract Object handleCore(PStreamContext context,Object fromData);
     
-    public void handle(PStreamContext context, Object fromData){
-        handleCore(context,fromData);
+    public Object handle(PStreamContext context, Object fromData){
+        Object ret = handleCore(context,fromData);
         context.getParent().invokeListener(this);
+        return ret;
     }
 
     public abstract HandleFinishListener getFinishListener();

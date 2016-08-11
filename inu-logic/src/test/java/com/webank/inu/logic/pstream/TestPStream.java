@@ -5,6 +5,9 @@ import com.webank.inu.logic.pstream.handler.AsynPStreamHandlerAdapter;
 import com.webank.inu.logic.pstream.handler.HandleFinishListener;
 import com.webank.inu.logic.pstream.handler.SynPStreamHandler;
 import com.webank.inu.logic.pstream.process.PStream;
+import com.webank.inu.logic.service.message.IMessageService;
+import com.webank.inu.logic.service.message.ResponseInfo;
+import com.webank.inu.logic.service.message.impl.BaseMessageServiceImpl;
 import org.junit.Test;
 
 /**
@@ -23,8 +26,9 @@ public class TestPStream {
         });
         pStream.addHandler(new AsynPStreamHandlerAdapter() {
             @Override
-            public void handleCore(PStreamContext context, Object fromData) {
+            public Object handleCore(PStreamContext context, Object fromData) {
                 System.out.println("handler 2");
+                return null;
             }
 
             @Override
@@ -40,7 +44,21 @@ public class TestPStream {
         });
 
         pStream.process("msgx");
-        pStream.synFinish();
+        pStream.synFinish(null);
+
+    }
+
+    @Test
+    public void testMessage(){
+        long startTime = System.currentTimeMillis();
+        IMessageService messageService = new BaseMessageServiceImpl();
+        ResponseInfo responseInfo =
+                messageService.processMessage("adamchen",
+                        "今天又下雨，又打雷，鞋子还湿了，很不开心",
+                        IMessageService.ResponseType.news);
+
+        System.out.println(System.currentTimeMillis() - startTime);
+        System.out.println(responseInfo);
 
     }
 }
