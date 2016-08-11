@@ -1,4 +1,4 @@
-package com.webank.inu.logic.service;
+package com.webank.inu.logic.messsage;
 
 import com.webank.inu.logic.service.history.ChatInfo;
 import com.webank.inu.logic.service.history.IHistoryChat;

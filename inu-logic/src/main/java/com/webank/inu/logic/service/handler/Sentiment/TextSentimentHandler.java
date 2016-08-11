@@ -1,9 +1,9 @@
 package com.webank.inu.logic.service.handler.Sentiment;
 
-import com.alibaba.fastjson.JSON;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.qcloud.Module.Wenzhi;
 import com.qcloud.QcloudApiModuleCenter;
-import com.sun.org.apache.xpath.internal.operations.String;
 import com.webank.inu.logic.pstream.context.PStreamContext;
 import com.webank.inu.logic.pstream.handler.SynPStreamHandler;
 import com.webank.inu.logic.utils.ConfigInfo;
@@ -16,6 +16,8 @@ import java.util.TreeMap;
 public class TextSentimentHandler implements SynPStreamHandler {
 
     private ConfigInfo configInfo = ConfigInfo.getInstance();
+
+    private Gson gson = new GsonBuilder().create();
 
     public Object handle(PStreamContext context, Object fromData) {
         if (!(fromData instanceof java.lang.String)) {
@@ -35,9 +37,7 @@ public class TextSentimentHandler implements SynPStreamHandler {
         java.lang.String result = null;
         try {
             result = module.call("TextSentiment", params);
-            System.out.println(result);
-            sentimentResult = (SentimentResult) JSON.parse(result);
-            System.out.println(sentimentResult);
+            sentimentResult = gson.fromJson(result,SentimentResult.class);
         } catch (Exception e) {
             System.out.println("error..." + e.getMessage());
         }
