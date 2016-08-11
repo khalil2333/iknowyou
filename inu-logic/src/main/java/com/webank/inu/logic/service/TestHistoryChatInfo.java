@@ -1,8 +1,8 @@
-package com.webank.inu.service;
+package com.webank.inu.logic.service;
 
-import com.webank.inu.service.history.ChatInfo;
-import com.webank.inu.service.history.IHistoryChat;
-import com.webank.inu.service.history.impl.BaseHistoryChatImpl;
+import com.webank.inu.logic.service.history.ChatInfo;
+import com.webank.inu.logic.service.history.IHistoryChat;
+import com.webank.inu.logic.service.history.impl.BaseHistoryChatImpl;
 import org.junit.Test;
 
 import java.util.List;

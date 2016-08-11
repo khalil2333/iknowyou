@@ -1,4 +1,4 @@
-package com.webank.inu.service.history;
+package com.webank.inu.logic.service.history;
 
 import java.util.List;
 

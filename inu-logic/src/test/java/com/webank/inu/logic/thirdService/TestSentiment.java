@@ -1,4 +1,4 @@
-package com.webank.inu.thirdService;
+package com.webank.inu.logic.thirdService;
 
 import com.qcloud.Module.Wenzhi;
 import com.qcloud.QcloudApiModuleCenter;
