@@ -24,4 +24,12 @@ public class ChatInfo {
     public void setTimestamp(long timestamp) {
         this.timestamp = timestamp;
     }
+
+    @Override
+    public String toString() {
+        return "ChatInfo{" +
+                "content='" + content + '\'' +
+                ", timestamp=" + timestamp +
+                '}';
+    }
 }
