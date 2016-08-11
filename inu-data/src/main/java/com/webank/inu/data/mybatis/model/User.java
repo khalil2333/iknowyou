@@ -1,4 +1,4 @@
-package com.inu.mybatis.model;
+package com.webank.inu.data.mybatis.model;
 
 /**
  * Created by potato on 2016/8/10.

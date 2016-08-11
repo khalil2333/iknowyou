@@ -1,6 +1,6 @@
-package com.inu.dto;
+package com.webank.inu.data.dto;
 
-import com.inu.mybatis.model.Article;
+import com.webank.inu.data.mybatis.model.Article;
 
 /**
  * Created by potato on 2016/8/11.

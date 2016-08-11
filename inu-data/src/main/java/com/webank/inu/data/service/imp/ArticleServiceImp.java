@@ -1,7 +1,7 @@
-package com.inu.service.imp;
+package com.webank.inu.data.service.imp;
 
-import com.inu.dto.ArticleDTO;
-import com.inu.service.IArticleService;
+import com.webank.inu.data.dto.ArticleDTO;
+import com.webank.inu.data.service.IArticleService;
 
 /**
  * Created by potato on 2016/8/11.

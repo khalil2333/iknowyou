@@ -1,14 +1,14 @@
-package com.inu; /**
+package com.webank.inu.data; /**
  * Created by potato on 2016/8/11.
  */
 import java.io.Reader;
 
+import com.webank.inu.data.mybatis.model.User;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
-import com.inu.mybatis.model.*;
 import org.junit.Test;
 
 public class TestMybatis {
@@ -33,7 +33,7 @@ public class TestMybatis {
         SqlSession session = sqlSessionFactory.openSession();
         try {
             User user = (User) session.selectOne(
-                    "com.inu.mybatis.mappers.userMapper.getUser", 1);
+                    "userMapper.getUser", 1);
             if(user!=null){
                 String userInfo = "nickName:"+user.getNickName()+", openId:"+
                         user.getOpenId()+", mood:"+user.getMood();

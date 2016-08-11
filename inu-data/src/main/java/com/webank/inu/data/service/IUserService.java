@@ -1,6 +1,6 @@
-package com.inu.service;
+package com.webank.inu.data.service;
 
-import com.inu.dto.HistoryMoodDTO;
+import com.webank.inu.data.dto.HistoryMoodDTO;
 
 import java.util.List;
 

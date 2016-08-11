@@ -1,7 +1,7 @@
-package com.inu.service;
+package com.webank.inu.data.service;
 
-import com.inu.dto.ArticleDTO;
-import com.inu.service.imp.ArticleServiceImp;
+import com.webank.inu.data.dto.ArticleDTO;
+import com.webank.inu.data.service.imp.ArticleServiceImp;
 import org.junit.Test;
 
 /**

@@ -1,7 +1,7 @@
-package com.inu.service;
+package com.webank.inu.data.service;
 
-import com.inu.dto.HistoryMoodDTO;
-import com.inu.service.imp.UserServiceImp;
+import com.webank.inu.data.dto.HistoryMoodDTO;
+import com.webank.inu.data.service.imp.UserServiceImp;
 import org.junit.Test;
 
 import java.util.List;
