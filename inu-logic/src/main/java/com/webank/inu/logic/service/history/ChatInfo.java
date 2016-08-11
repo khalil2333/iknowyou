@@ -1,4 +1,4 @@
-package com.webank.inu.service.history;
+package com.webank.inu.logic.service.history;
 
 /**
  * Created by adam on 2016/8/11.

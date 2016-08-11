@@ -1,7 +1,7 @@
-package com.webank.inu.service.history.impl;
+package com.webank.inu.logic.service.history.impl;
 
-import com.webank.inu.service.history.ChatInfo;
-import com.webank.inu.service.history.IHistoryChat;
+import com.webank.inu.logic.service.history.ChatInfo;
+import com.webank.inu.logic.service.history.IHistoryChat;
 
 import java.util.LinkedList;
 import java.util.List;
