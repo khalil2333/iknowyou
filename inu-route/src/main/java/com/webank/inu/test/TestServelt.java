@@ -23,8 +23,11 @@ public class TestServelt extends HttpServlet {
     }
 
     protected void doWork(HttpServletRequest req,HttpServletResponse resp) throws ServletException, IOException {
+        String echoStr = req.getParameter("echostr");
+        if (echoStr == null || echoStr.trim().equals("")) return;
+        System.out.println("echostr : "+echoStr);
         PrintWriter out = resp.getWriter();
-        out.println("Hello INU");
+        out.println(echoStr);
         out.flush();
     }
 }
