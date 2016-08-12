@@ -17,7 +17,7 @@ public class TestHistoryChatInfo {
     @Test
     public void testHistoryChatInfos() {
         IHistoryChat historyChat = new BaseHistoryChatImpl();
-        List<ChatInfo> chatInfos = historyChat.queryHistoryChats("aaaaa");
+        List<ChatInfo> chatInfos = historyChat.queryHistoryChats("4");
 
         for (ChatInfo info : chatInfos) {
             System.out.println(info);

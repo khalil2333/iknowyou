@@ -34,14 +34,14 @@ public class WechatProcess {
                 messageService.processMessage(xmlEntity.getFromUserName(), result,
                         IMessageService.ResponseType.news);
         //测试数据
-        String title="test";
-        String description="d";
-        String picUrl="http://pic.sc.chinaz.com/files/pic/pic9/201508/apic14052.jpg";
-        String url="http://docs.spring.io/spring-batch/reference/html/";
-        responseInfo.setTitle(title);
-        responseInfo.setDescription(description);
-        responseInfo.setPicUrl(picUrl);
-        responseInfo.setUrl(url);
+//        String title="test";
+//        String description="d";
+//        String picUrl="http://pic.sc.chinaz.com/files/pic/pic9/201508/apic14052.jpg";
+//        String url="http://docs.spring.io/spring-batch/reference/html/";
+//        responseInfo.setTitle(title);
+//        responseInfo.setDescription(description);
+//        responseInfo.setPicUrl(picUrl);
+//        responseInfo.setUrl(url);
         //测试数据
 
         result = new FormatXmlProcess().formatXmlNewsAnswer(
