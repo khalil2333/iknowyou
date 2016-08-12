@@ -1,5 +1,6 @@
 package com.webank.inu.logic.service.message.impl;
 
+import com.sun.istack.internal.logging.Logger;
 import com.webank.inu.data.dto.ArticleDTO;
 import com.webank.inu.data.mybatis.model.Article;
 import com.webank.inu.data.service.IArticleService;
@@ -25,6 +26,8 @@ public class BaseMessageServiceImpl implements IMessageService {
     private IArticleService articleService = new ArticleServiceImp();
 
     private IUserService userService = new UserServiceImp();
+
+    private static Logger logger = Logger.getLogger(BaseMessageServiceImpl.class);
 
     public ResponseInfo processMessage(String openId,String message, int responseType) {
         ResponseInfo responseInfo = null;
@@ -115,15 +118,24 @@ public class BaseMessageServiceImpl implements IMessageService {
                 asynInsertMsg(openId,message,sentimentScore);
                 //调用dao获得图文信息
                 Article article = articleService.getArticle(sentimentScore);
+//                logger.warning("+++++++ : "+article);
                 responseInfo.setTitle(article.getTitle());
                 responseInfo.setDescription(article.getDescription());
                 responseInfo.setPicUrl(article.getPicUrl());
                 String content = article.getContent();
-                responseInfo.setUrl(configInfo.getArticleURLPrex()+article.getId());
-//                if (content == null || content.equals("")) {
+//                logger.warning("======= : "+responseInfo);
+                logger.warning("==== content " + content);
+                if (content != null && !content.equals("")) {
+                    responseInfo.setUrl(article.getUrl());
+                    System.out.println("in if ================");
+                }else{
+                    responseInfo.setUrl(configInfo.getArticleURLPrex()+article.getId());
+                    System.out.println("in else ======================");
+                }
+//                if (content.equals("") || content == null) {
 ////                    responseInfo.setContent(article.getContent());
 //                }
-//                else responseInfo.setUrl(article.getUrl());
+//                else
 
                 return null;
             }
