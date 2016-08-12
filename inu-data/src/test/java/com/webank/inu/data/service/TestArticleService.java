@@ -15,4 +15,11 @@ public class TestArticleService {
         ArticleDTO articleDTO = articleServiceImp.getArticle(0.5);
         System.out.println(articleDTO.getId());
     }
+
+    @Test
+    public void getArticleByIdTest() {
+        ArticleDTO articleDTO = articleServiceImp.getArticleById(1);
+        System.out.println("id:"+ articleDTO.getId() + ",内容:" + articleDTO.getContent());
+    }
+
 }

@@ -55,13 +55,14 @@ public class UserServiceImp implements IUserService {
         return null;
     }
 
-    public int insertUserMessage(String openId, String message, Long time) {
+    public int insertUserMessage(String openId, String message, Long time, double userMood) {
         SqlSession session = sqlSessionFactory.openSession();
 
         HistoryMood historyMood = new HistoryMood();
         historyMood.setTime(new Timestamp(time));
         historyMood.setMessage(message);
         historyMood.setOpenId(openId);
+        historyMood.setUserMood(userMood);
 
         try{
             int result = session.insert("insertUserMessage",historyMood);

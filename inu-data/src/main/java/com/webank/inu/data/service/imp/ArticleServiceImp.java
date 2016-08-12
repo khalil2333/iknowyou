@@ -55,6 +55,21 @@ public class ArticleServiceImp implements IArticleService {
         return null;
     }
 
+    public ArticleDTO getArticleById(int id) {
+        SqlSession session = sqlSessionFactory.openSession();
+        try {
+            Article articleGetById = session.selectOne("getArticleById", id);
+            if(articleGetById!=null){
+                return makeArticle(articleGetById);
+            }
+        } finally {
+            session.close();
+        }
+
+        return null;
+    }
+
+
     private ArticleDTO makeArticle(Article article) {
         ArticleDTO articleDTO = new ArticleDTO();
         articleDTO.setId(article.getId());

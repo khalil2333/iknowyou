@@ -34,4 +34,13 @@ public class SingleArticleInfo {
     public void setPicUrl(String picUrl) {
         this.picUrl = picUrl;
     }
+
+    @Override
+    public String toString() {
+        return "SingleArticleInfo{" +
+                "title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                ", picUrl='" + picUrl + '\'' +
+                '}';
+    }
 }

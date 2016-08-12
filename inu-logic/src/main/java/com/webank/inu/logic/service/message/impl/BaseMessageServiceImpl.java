@@ -1,5 +1,6 @@
 package com.webank.inu.logic.service.message.impl;
 
+import com.webank.inu.data.dto.ArticleDTO;
 import com.webank.inu.data.mybatis.model.Article;
 import com.webank.inu.data.service.IArticleService;
 import com.webank.inu.data.service.IUserService;
@@ -64,15 +65,20 @@ public class BaseMessageServiceImpl implements IMessageService {
         return responseInfo;
     }
 
-    public SingleArticleInfo queryArticleById(String articleId) {
-        return null;
+    public SingleArticleInfo queryArticleById(int articleId) {
+        ArticleDTO article = articleService.getArticleById(articleId);
+        SingleArticleInfo singleArticleInfo = new SingleArticleInfo();
+        singleArticleInfo.setContent(article.getContent());
+        singleArticleInfo.setPicUrl(article.getPicUrl());
+        singleArticleInfo.setTitle(article.getTitle());
+        return singleArticleInfo;
     }
 
-    protected void asynInsertMsg(final String openId, final String message,float sentimentScore){
+    protected void asynInsertMsg(final String openId, final String message, final float sentimentScore){
         Thread thread = new Thread(new Runnable() {
             public void run() {
                 System.out.println("插入数据："+message);
-                userService.insertUserMessage(openId,message,System.currentTimeMillis());
+                userService.insertUserMessage(openId,message,System.currentTimeMillis(),sentimentScore);
             }
         });
 

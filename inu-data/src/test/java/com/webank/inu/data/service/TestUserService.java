@@ -21,7 +21,7 @@ public class TestUserService {
 
     @Test
     public void insertUserMessageTest() {
-        System.out.println(userServiceImp.insertUserMessage("4","4",10000L));
+        System.out.println(userServiceImp.insertUserMessage("4","4",10000L, 0.5));
     }
 
 
