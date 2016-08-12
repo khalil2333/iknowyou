@@ -1,6 +1,6 @@
 package com.webank.inu.test;
 
-//import com.webank.inu.constant.Event;
+import com.webank.inu.constant.Event;
 import com.webank.inu.logic.service.history.ChatInfo;
 import com.webank.inu.logic.service.history.IHistoryChat;
 import com.webank.inu.logic.service.history.impl.BaseHistoryChatImpl;
@@ -63,11 +63,45 @@ public class WechatProcess {
 			if ("CLICK".endsWith(xmlEntity.getEvent())) {
 				if ("event_history".endsWith(xmlEntity.getEventKey())) {
 					String title="历史心情";
-					String openId = xmlEntity.getFromUserName();
-					String Url="http://iknowu.qaq.moe/history.html?openId="+openId;
+					String Url="http://iknowu.qaq.moe/history.html";
 					//String historyChat=getHistoryChat(xmlEntity.getFromUserName());
-					result=new FormatXmlProcess().formatXmlEventClickAnswer(xmlEntity.getFromUserName(),
+					result=new FormatXmlProcess().formatXmlEventClickAnswer(xmlEntity.getFromUserName(), 
 							xmlEntity.getToUserName(),title , Url);
+				}else if("event_article".endsWith(xmlEntity.getEventKey())){
+					//这里需要获取随机文章：所以采用随便一个人的id:oAcTMwelIB2AAFr9W4L0qmYPvzJg,
+					String openId="oAcTMwelIB2AAFr9W4L0qmYPvzJg";
+					String content="我要带你飞";
+					IMessageService messageService = new BaseMessageServiceImpl();
+					ResponseInfo responseInfo = messageService.processMessage(openId,content,
+							IMessageService.ResponseType.news);
+					/**
+					 * 封装为文本类型,作为xml结果
+					 */
+					result = new FormatXmlProcess().formatXmlNewsAnswer(responseInfo.getToUserName(), xmlEntity.getToUserName(),
+							responseInfo.getContent(), responseInfo.getTitle(), responseInfo.getDescription(),
+							responseInfo.getPicUrl(), responseInfo.getUrl());
+				}else if("event_music".endsWith(xmlEntity.getEventKey())){
+					String content="抱歉，此服务暂未开通";
+					IMessageService messageService = new BaseMessageServiceImpl();
+					ResponseInfo responseInfo = messageService.processMessage(xmlEntity.getFromUserName(),content,
+							IMessageService.ResponseType.news);
+					/**
+					 * 封装为文本类型,作为xml结果
+					 */
+					result = new FormatXmlProcess().formatXmlNewsAnswer(responseInfo.getToUserName(), xmlEntity.getToUserName(),
+							responseInfo.getContent(), responseInfo.getTitle(), responseInfo.getDescription(),
+							responseInfo.getPicUrl(), responseInfo.getUrl());
+				}else if("event_video".endsWith(xmlEntity.getEventKey())){
+					String content="抱歉，此服务暂未开通";
+					IMessageService messageService = new BaseMessageServiceImpl();
+					ResponseInfo responseInfo = messageService.processMessage(xmlEntity.getFromUserName(),content,
+							IMessageService.ResponseType.news);
+					/**
+					 * 封装为文本类型,作为xml结果
+					 */
+					result = new FormatXmlProcess().formatXmlNewsAnswer(responseInfo.getToUserName(), xmlEntity.getToUserName(),
+							responseInfo.getContent(), responseInfo.getTitle(), responseInfo.getDescription(),
+							responseInfo.getPicUrl(), responseInfo.getUrl());
 				}
 			}
 		}
