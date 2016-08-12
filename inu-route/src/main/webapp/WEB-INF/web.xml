@@ -9,8 +9,28 @@
     <servlet-name>test</servlet-name>
     <servlet-class>com.webank.inu.test.TestServelt</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>ArticleServlet</servlet-name>
+  	<display-name>ArticleServlet</display-name>
+  	<description></description>
+  	<servlet-class>com.webank.inu.web.ArticleServlet</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>HistoryChatServlet</servlet-name>
+  	<display-name>HistoryChatServlet</display-name>
+  	<description></description>
+  	<servlet-class>com.webank.inu.web.HistoryChatServlet</servlet-class>
+  </servlet>
   <servlet-mapping>
     <servlet-name>test</servlet-name>
-    <url-pattern>/test</url-pattern>
+    <url-pattern>/TestServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>ArticleServlet</servlet-name>
+  	<url-pattern>/ArticleServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>HistoryChatServlet</servlet-name>
+  	<url-pattern>/HistoryChatServlet</url-pattern>
   </servlet-mapping>
 </web-app>

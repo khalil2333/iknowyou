@@ -30,7 +30,6 @@ public class TestServelt extends HttpServlet {
 	protected void doWork(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
-
 		/** 读取接收到的xml消息 */
 		StringBuffer sb = new StringBuffer();
 		InputStream is = request.getInputStream();
@@ -41,10 +40,8 @@ public class TestServelt extends HttpServlet {
 			sb.append(s);
 		}
 		String xml = sb.toString(); // 次即为接收到微信端发送过来的xml数据
-		
-
-		String result = "";
 		/** 判断是否是微信接入激活验证，只有首次接入验证时才会收到echostr参数，此时需要把它直接返回 */
+		String result = "";
 		String echostr = request.getParameter("echostr");
 		if (echostr != null && echostr.length() > 1) {
 			result = echostr;
@@ -52,7 +49,7 @@ public class TestServelt extends HttpServlet {
 			// 正常的微信处理流程
 			result = new WechatProcess().processWechatMag(xml);
 		}
-
+		/**设置输出*/
 		try {
 			OutputStream os = response.getOutputStream();
 			os.write(result.getBytes("UTF-8"));
