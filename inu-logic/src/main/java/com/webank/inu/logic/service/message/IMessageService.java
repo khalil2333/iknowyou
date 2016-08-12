@@ -22,4 +22,6 @@ public interface IMessageService {
 
     public ResponseInfo processMessage(String openId,String message,int responseType);
 
+    public SingleArticleInfo queryArticleById(int articleId);
+
 }

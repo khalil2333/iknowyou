@@ -10,6 +10,7 @@ public class HistoryMood {
     String openId;
     Timestamp time;
     String message;
+    double userMood;
 
     public int getId() {
         return id;
@@ -41,5 +42,13 @@ public class HistoryMood {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public double getUserMood() {
+        return userMood;
+    }
+
+    public void setUserMood(double userMood) {
+        this.userMood = userMood;
     }
 }

@@ -1,6 +1,6 @@
 package com.webank.inu.data.service;
 
-import com.webank.inu.data.mybatis.model.Article;
+import com.webank.inu.data.dto.ArticleDTO;
 
 /**
  * Created by potato on 2016/8/11.
@@ -11,5 +11,12 @@ public interface IArticleService {
      * @param degree 情绪值
      * @return
      */
-    public Article getArticle(double degree);
+    public ArticleDTO getArticle(double degree);
+
+    /**
+     * 根据id获取对应文章内容
+     * @param id
+     * @return
+     */
+    public ArticleDTO getArticleById(int id);
 }
