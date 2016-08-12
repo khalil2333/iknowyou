@@ -119,11 +119,11 @@ public class BaseMessageServiceImpl implements IMessageService {
                 responseInfo.setDescription(article.getDescription());
                 responseInfo.setPicUrl(article.getPicUrl());
                 String content = article.getContent();
-                if (content == null || content.equals("")) {
-                    responseInfo.setUrl(configInfo.getArticleURLPrex()+article.getId());
-//                    responseInfo.setContent(article.getContent());
-                }
-                else responseInfo.setUrl(article.getUrl());
+                responseInfo.setUrl(configInfo.getArticleURLPrex()+article.getId());
+//                if (content == null || content.equals("")) {
+////                    responseInfo.setContent(article.getContent());
+//                }
+//                else responseInfo.setUrl(article.getUrl());
 
                 return null;
             }

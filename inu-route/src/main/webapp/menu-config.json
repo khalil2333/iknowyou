@@ -1,0 +1,34 @@
+{
+    "button": [
+        {
+            "name": "推荐",
+            "sub_button": [
+                {
+                    "type": "click",
+                    "name": "视频",
+                    "key": "event_video"
+                },
+                {
+                    "type": "click",
+                    "name": "音乐",
+                    "key": "event_music"
+                },
+                {
+                    "type": "click",
+                    "name": "美文",
+                    "key": "event_article"
+                }
+            ]
+        },
+        {
+            "type": "view",
+            "name": "肖像",
+            "url": "http://iknowu.qaq.moe/portrait.html"
+        }, 
+        {
+            "type": "view",
+            "name": "历史",
+            "url": "http://iknowu.qaq.moe/history.html"
+        }
+    ]
+}

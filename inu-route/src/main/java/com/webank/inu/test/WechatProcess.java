@@ -3,12 +3,14 @@ package com.webank.inu.test;
 import com.webank.inu.logic.service.message.IMessageService;
 import com.webank.inu.logic.service.message.ResponseInfo;
 import com.webank.inu.logic.service.message.impl.BaseMessageServiceImpl;
+import org.apache.log4j.Logger;
 
 /**
  * 微信xml消息处理流程逻辑类 
  * 
  */  
-public class WechatProcess {  
+public class WechatProcess {
+    private static Logger logger = Logger.getLogger(WechatProcess.class);
     /** 
      * 解析处理xml、拼装结果xml
      * @param xml 接收到的微信数据 
@@ -17,6 +19,8 @@ public class WechatProcess {
     public String processWechatMag(String xml){  
         /** 解析xml数据 */  
 //    	System.out.println("xml : "+xml);
+        logger.warn("log : "+xml);
+
         ReceiveXmlEntity xmlEntity = new ReceiveXmlProcess().getMsgEntity(xml);  
           
         String result = "";  
