@@ -55,7 +55,7 @@ public class WechatProcess {
 			// String title="test";
 			// String description="d";
 			// String
-			// picUrl="http://pic.sc.chinaz.com/files/pic/pic9/201508/apic14052.jpg";
+			// picUrl="http://pic.sc.chinaz.com/files/pic/pic9/201508/apic14052.jFpg";
 			// String url="http://docs.spring.io/spring-batch/reference/html/";
 			// responseInfo.setTitle(title);
 			// responseInfo.setDescription(description);
@@ -75,37 +75,52 @@ public class WechatProcess {
 					//这里需要获取随机文章：所以采用随便一个人的id:oAcTMwelIB2AAFr9W4L0qmYPvzJg,
 					String openId="oAcTMwelIB2AAFr9W4L0qmYPvzJg";
 					String content="我要带你飞";
-					IMessageService messageService = new BaseMessageServiceImpl();
-					ResponseInfo responseInfo = messageService.processMessage(openId,content,
-							IMessageService.ResponseType.news);
+//					IMessageService messageService = new BaseMessageServiceImpl();
+//					ResponseInfo responseInfo = messageService.processMessage(openId,content,
+//							IMessageService.ResponseType.news);
 					/**
 					 * 封装为文本类型,作为xml结果
 					 */
-					result = new FormatXmlProcess().formatXmlNewsAnswer(responseInfo.getToUserName(), xmlEntity.getToUserName(),
-							responseInfo.getContent(), responseInfo.getTitle(), responseInfo.getDescription(),
-							responseInfo.getPicUrl(), responseInfo.getUrl());
+//					result = new FormatXmlProcess().formatXmlNewsAnswer(responseInfo.getToUserName(), xmlEntity.getToUserName(),
+//							responseInfo.getContent(), responseInfo.getTitle(), responseInfo.getDescription(),
+//							responseInfo.getPicUrl(), responseInfo.getUrl());
+					result = new FormatXmlProcess().formatXmlTextAnswer(
+							xmlEntity.getFromUserName(),
+							xmlEntity.getToUserName(),
+							"服务未开通"
+					);
 				}else if("event_music".endsWith(xmlEntity.getEventKey())){
 					String content="抱歉，此服务暂未开通";
-					IMessageService messageService = new BaseMessageServiceImpl();
-					ResponseInfo responseInfo = messageService.processMessage(xmlEntity.getFromUserName(),content,
-							IMessageService.ResponseType.news);
-					/**
-					 * 封装为文本类型,作为xml结果
-					 */
-					result = new FormatXmlProcess().formatXmlNewsAnswer(responseInfo.getToUserName(), xmlEntity.getToUserName(),
-							responseInfo.getContent(), responseInfo.getTitle(), responseInfo.getDescription(),
-							responseInfo.getPicUrl(), responseInfo.getUrl());
+//					IMessageService messageService = new BaseMessageServiceImpl();
+//					ResponseInfo responseInfo = messageService.processMessage(xmlEntity.getFromUserName(),content,
+//							IMessageService.ResponseType.news);
+//					/**
+//					 * 封装为文本类型,作为xml结果
+//					 */
+//					result = new FormatXmlProcess().formatXmlNewsAnswer(responseInfo.getToUserName(), xmlEntity.getToUserName(),
+//							responseInfo.getContent(), responseInfo.getTitle(), responseInfo.getDescription(),
+//							responseInfo.getPicUrl(), responseInfo.getUrl());
+					result = new FormatXmlProcess().formatXmlTextAnswer(
+							xmlEntity.getFromUserName(),
+							xmlEntity.getToUserName(),
+							"服务未开通"
+					);
 				}else if("event_video".endsWith(xmlEntity.getEventKey())){
 					String content="抱歉，此服务暂未开通";
-					IMessageService messageService = new BaseMessageServiceImpl();
-					ResponseInfo responseInfo = messageService.processMessage(xmlEntity.getFromUserName(),content,
-							IMessageService.ResponseType.news);
-					/**
-					 * 封装为文本类型,作为xml结果
-					 */
-					result = new FormatXmlProcess().formatXmlNewsAnswer(responseInfo.getToUserName(), xmlEntity.getToUserName(),
-							responseInfo.getContent(), responseInfo.getTitle(), responseInfo.getDescription(),
-							responseInfo.getPicUrl(), responseInfo.getUrl());
+//					IMessageService messageService = new BaseMessageServiceImpl();
+//					ResponseInfo responseInfo = messageService.processMessage(xmlEntity.getFromUserName(),content,
+//							IMessageService.ResponseType.news);
+//					/**
+//					 * 封装为文本类型,作为xml结果
+//					 */
+//					result = new FormatXmlProcess().formatXmlNewsAnswer(responseInfo.getToUserName(), xmlEntity.getToUserName(),
+//							responseInfo.getContent(), responseInfo.getTitle(), responseInfo.getDescription(),
+//							responseInfo.getPicUrl(), responseInfo.getUrl());
+					result = new FormatXmlProcess().formatXmlTextAnswer(
+							xmlEntity.getFromUserName(),
+							xmlEntity.getToUserName(),
+							"服务未开通"
+					);
 				}
 			}
 		}
