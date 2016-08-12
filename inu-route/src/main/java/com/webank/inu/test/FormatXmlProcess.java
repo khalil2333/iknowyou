@@ -51,4 +51,24 @@ public class FormatXmlProcess {
         sb.append("</xml>");
         return sb.toString();  
     }
+
+	public String formatXmlEventClickAnswer(String toUserName, String fromUserName, String title, String Url) {
+		StringBuffer sb = new StringBuffer();  
+        Date date = new Date();  
+        sb.append("<xml><ToUserName><![CDATA[");  
+        sb.append(toUserName);  
+        sb.append("]]></ToUserName><FromUserName><![CDATA[");  
+        sb.append(fromUserName);  
+        sb.append("]]></FromUserName><CreateTime>");  
+        sb.append(date.getTime()).append("</CreateTime>"); 
+        sb.append("<ArticleCount>1</ArticleCount>");
+        sb.append("<Articles><item><Title><![CDATA[");
+        sb.append(title);
+        sb.append("]]></Title> ");
+        sb.append("<Url><![CDATA[").append(Url);
+        sb.append("]]></Url></item></Articles>");
+        sb.append("<MsgType><![CDATA[news]]></MsgType>");
+        sb.append("</xml>");
+		return sb.toString();
+	}
 }  
