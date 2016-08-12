@@ -14,7 +14,7 @@ function loadArticle(articleId) {
         var loadingToast = document.querySelector("#loadingToast");
         loadingToast.classList.toggle("hide");
 
-        document.title = "article";
+        document.title = resp.data.title;
     });
 }
 

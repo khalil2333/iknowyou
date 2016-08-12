@@ -13,7 +13,7 @@
         }
 
         /* update ui */
-        document.title = "History";
+        document.title = "历史心情";
         list.classList.toggle("hide");
 
         var loadingToast = document.querySelector("#loadingToast");

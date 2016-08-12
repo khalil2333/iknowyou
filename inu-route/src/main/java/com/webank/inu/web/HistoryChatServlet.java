@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.webank.inu.logic.service.history.ChatInfo;
@@ -43,17 +44,25 @@ public class HistoryChatServlet extends HttpServlet {
 
         for (ChatInfo info : chatInfos) {
         	JSONObject dataJson=new JSONObject();
-        	dataJson.put("datetime", info.getTimestamp());
-        	dataJson.put("content", info.getContent());
+			try {
+				dataJson.put("datetime", info.getTimestamp());
+				dataJson.put("content", info.getContent());
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
         	dataArray.put(dataJson);
             System.out.println(info);
         }
 		String code = "myCode";
 		String msg = "myMsg";
 		JSONObject msgJson=new JSONObject();
-		msgJson.put("data", dataArray);
-		msgJson.put("code", "myCode");
-		msgJson.put("msg", msg);
+		try {
+			msgJson.put("code", "myCode");
+			msgJson.put("data", dataArray);
+			msgJson.put("msg", msg);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
 		// out.print(value1 + value2);
 		String json = msgJson.toString();
 		out.print(json);

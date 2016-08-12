@@ -22,9 +22,9 @@ import com.webank.inu.logic.utils.ConfigInfo;
 public class BaseMessageServiceImpl implements IMessageService {
     private ConfigInfo configInfo = ConfigInfo.getInstance();
 
-    //private IArticleService articleService = new ArticleServiceImp();
+    private IArticleService articleService = new ArticleServiceImp();
 
-   // private IUserService userService = new UserServiceImp();
+    private IUserService userService = new UserServiceImp();
 
     public ResponseInfo processMessage(String openId,String message, int responseType) {
         ResponseInfo responseInfo = null;
