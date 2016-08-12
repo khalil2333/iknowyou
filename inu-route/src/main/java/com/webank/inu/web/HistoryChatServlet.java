@@ -56,7 +56,7 @@ public class HistoryChatServlet extends HttpServlet {
 				e.printStackTrace();
 			}
         	dataArray.put(dataJson);
-            System.out.println(info);
+//            System.out.println(info);
         }
 		String code = "myCode";
 		String msg = "myMsg";
@@ -71,7 +71,7 @@ public class HistoryChatServlet extends HttpServlet {
 		// out.print(value1 + value2);
 		String json = msgJson.toString();
 		out.print(json);
-		System.out.println(json);
+//		System.out.println(json);
 		out.flush();
 	}
 

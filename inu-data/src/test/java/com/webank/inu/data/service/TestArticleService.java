@@ -12,7 +12,7 @@ public class TestArticleService {
 
     @Test
     public void getArticleTest() {
-        ArticleDTO articleDTO = articleServiceImp.getArticle(0.5);
+        ArticleDTO articleDTO = articleServiceImp.getArticle(0.9);
         System.out.println(articleDTO.getId());
     }
 

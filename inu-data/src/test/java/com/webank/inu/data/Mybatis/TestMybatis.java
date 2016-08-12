@@ -56,7 +56,7 @@ public class TestMybatis {
                     "getHistoryMood", "1");
             if(historyMoodList!=null){
                 HistoryMood historyMood = historyMoodList.get(0);
-                String historyMoodInfo = historyMood.getTime() + ":" + historyMood.getMessage();
+                String historyMoodInfo = historyMood.getRecordTime() + ":" + historyMood.getMessage();
                 System.out.println(historyMoodInfo);
             }
         } finally {
@@ -72,7 +72,7 @@ public class TestMybatis {
             historyMood.setOpenId("abc");
 
             Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-            historyMood.setTime(timestamp);
+            historyMood.setRecordTime(timestamp);
             historyMood.setMessage("2222222");
             int result = session.insert(
                     "insertUserMessage", historyMood);

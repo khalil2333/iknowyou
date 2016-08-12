@@ -1,7 +1,6 @@
 package com.webank.inu.data.service.imp;
 
 import com.webank.inu.data.dto.HistoryMoodDTO;
-import com.webank.inu.data.mybatis.model.Article;
 import com.webank.inu.data.mybatis.model.HistoryMood;
 import com.webank.inu.data.service.IUserService;
 import org.apache.ibatis.io.Resources;
@@ -59,7 +58,7 @@ public class UserServiceImp implements IUserService {
         SqlSession session = sqlSessionFactory.openSession();
 
         HistoryMood historyMood = new HistoryMood();
-        historyMood.setTime(new Timestamp(time));
+        historyMood.setRecordTime(new Timestamp(time));
         historyMood.setMessage(message);
         historyMood.setOpenId(openId);
         historyMood.setUserMood(userMood);
@@ -76,7 +75,7 @@ public class UserServiceImp implements IUserService {
     private HistoryMoodDTO makeHistoryDTO(HistoryMood historyMood) {
         HistoryMoodDTO historyMoodDTO = new HistoryMoodDTO();
         historyMoodDTO.setMessage(historyMood.getMessage());
-        historyMoodDTO.setTime(historyMood.getTime());
+        historyMoodDTO.setRecordTime(historyMood.getRecordTime());
 
         return historyMoodDTO;
     }

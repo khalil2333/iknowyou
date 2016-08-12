@@ -102,7 +102,7 @@ public class BaseMessageServiceImpl implements IMessageService {
         pStream.addHandler(new TextSentimentHandler());
         //messagePersistent放最后面会报错
 //        pStream.addHandler(new MessagePersistentHandler());
-        pStream.addHandler(new TextClassifyHandler());
+//        pStream.addHandler(new TextClassifyHandler());
 
         //异步插入消息到数据库
 
@@ -114,6 +114,7 @@ public class BaseMessageServiceImpl implements IMessageService {
 //                int classNum = (Integer) context.getAttribute(TextClassifyHandler.CLASSIFY_NUM);
 
 //                System.out.println(sentimentScore+" : "+classfiyClass + ":"+classNum);
+//                System.out.println("sentiment : "+sentimentScore);
                 //异步插入数据
                 asynInsertMsg(openId,message,sentimentScore);
                 //调用dao获得图文信息

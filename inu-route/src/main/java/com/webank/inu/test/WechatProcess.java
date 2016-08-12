@@ -34,13 +34,16 @@ public class WechatProcess {
 		/** 解析xml数据 */
 		// System.out.println("xml : "+xml);
 		logger.warn("log : " + xml);
+//		System.out.println("xml : "+xml);
 
 		ReceiveXmlEntity xmlEntity = new ReceiveXmlProcess().getMsgEntity(xml);
 
 		String result = "";
 		if ("text".endsWith(xmlEntity.getMsgType())) {
+			logger.warn(" =============================  in text");
+//			System.out.println("content : "+xmlEntity.getContent());
 			IMessageService messageService = new BaseMessageServiceImpl();
-			ResponseInfo responseInfo = messageService.processMessage(xmlEntity.getFromUserName(), result,
+			ResponseInfo responseInfo = messageService.processMessage(xmlEntity.getFromUserName(), xmlEntity.getContent(),
 					IMessageService.ResponseType.news);
 			/**
 			 * 封装为文本类型,作为xml结果
@@ -60,6 +63,7 @@ public class WechatProcess {
 			// responseInfo.setUrl(url);
 			// 测试数据
 		} else if ("event".endsWith(xmlEntity.getMsgType())) {
+			logger.warn(" +++++++++++++++++++++++++++++++ in event");
 			if ("CLICK".endsWith(xmlEntity.getEvent())) {
 				if ("event_history".endsWith(xmlEntity.getEventKey())) {
 					String title="历史心情";

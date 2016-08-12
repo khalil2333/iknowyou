@@ -4,10 +4,30 @@ package com.webank.inu.data.mybatis.model;
  * Created by potato on 2016/8/10.
  */
 public class User {
+
+    /**
+     *主键id
+     */
     int id;
+
+    /**
+     *用户的唯一标识
+     */
     String openId;
+
+    /**
+     *昵称
+     */
     String nickName;
+
+    /**
+     *情绪值
+     */
     double mood;
+
+    /**
+     *头像
+     */
     String avatar;
 
 
