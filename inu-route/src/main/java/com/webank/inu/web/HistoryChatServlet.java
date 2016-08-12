@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -22,6 +23,8 @@ import com.webank.inu.logic.service.history.impl.BaseHistoryChatImpl;
  */
 public class HistoryChatServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+
+	private static Logger logger = Logger.getLogger(HistoryChatServlet.class);
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -40,7 +43,9 @@ public class HistoryChatServlet extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		JSONArray dataArray=new JSONArray();
 		IHistoryChat historyChat = new BaseHistoryChatImpl();
-        List<ChatInfo> chatInfos = historyChat.queryHistoryChats("aaaaa");
+		String openId = request.getParameter("openId");
+		logger.warn("HistoryChatServlet : =============== "+openId);
+        List<ChatInfo> chatInfos = historyChat.queryHistoryChats(openId);
 
         for (ChatInfo info : chatInfos) {
         	JSONObject dataJson=new JSONObject();
@@ -51,7 +56,7 @@ public class HistoryChatServlet extends HttpServlet {
 				e.printStackTrace();
 			}
         	dataArray.put(dataJson);
-            System.out.println(info);
+//            System.out.println(info);
         }
 		String code = "myCode";
 		String msg = "myMsg";
@@ -66,7 +71,7 @@ public class HistoryChatServlet extends HttpServlet {
 		// out.print(value1 + value2);
 		String json = msgJson.toString();
 		out.print(json);
-		System.out.println(json);
+//		System.out.println(json);
 		out.flush();
 	}
 

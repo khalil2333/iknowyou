@@ -1,5 +1,6 @@
 package com.webank.inu.logic.service.message.impl;
 
+import com.sun.istack.internal.logging.Logger;
 import com.webank.inu.data.dto.ArticleDTO;
 import com.webank.inu.data.mybatis.model.Article;
 import com.webank.inu.data.service.IArticleService;
@@ -25,6 +26,8 @@ public class BaseMessageServiceImpl implements IMessageService {
     private IArticleService articleService = new ArticleServiceImp();
 
     private IUserService userService = new UserServiceImp();
+
+    private static Logger logger = Logger.getLogger(BaseMessageServiceImpl.class);
 
     public ResponseInfo processMessage(String openId,String message, int responseType) {
         ResponseInfo responseInfo = null;
@@ -99,7 +102,7 @@ public class BaseMessageServiceImpl implements IMessageService {
         pStream.addHandler(new TextSentimentHandler());
         //messagePersistent放最后面会报错
 //        pStream.addHandler(new MessagePersistentHandler());
-        pStream.addHandler(new TextClassifyHandler());
+//        pStream.addHandler(new TextClassifyHandler());
 
         //异步插入消息到数据库
 
@@ -107,23 +110,36 @@ public class BaseMessageServiceImpl implements IMessageService {
         pStream.synFinish(new StreamFinishListener() {
             public Object actionFinish(PStreamContext context) {
                 float sentimentScore = (Float) context.getAttribute(TextSentimentHandler.SENTIMENT_SCORE);
-                String classfiyClass = (String) context.getAttribute(TextClassifyHandler.CLASSIFY_CLASS);
-                int classNum = (Integer) context.getAttribute(TextClassifyHandler.CLASSIFY_NUM);
+//                String classfiyClass = (String) context.getAttribute(TextClassifyHandler.CLASSIFY_CLASS);
+//                int classNum = (Integer) context.getAttribute(TextClassifyHandler.CLASSIFY_NUM);
 
-                System.out.println(sentimentScore+" : "+classfiyClass + ":"+classNum);
+//                System.out.println(sentimentScore+" : "+classfiyClass + ":"+classNum);
+//                System.out.println("sentiment : "+sentimentScore);
                 //异步插入数据
                 asynInsertMsg(openId,message,sentimentScore);
                 //调用dao获得图文信息
                 Article article = articleService.getArticle(sentimentScore);
+                logger.warning("-==- article : "+article);
+//                logger.warning("+++++++ : "+article);
                 responseInfo.setTitle(article.getTitle());
                 responseInfo.setDescription(article.getDescription());
                 responseInfo.setPicUrl(article.getPicUrl());
-                String content = article.getContent();
-                responseInfo.setUrl(configInfo.getArticleURLPrex()+article.getId());
-//                if (content == null || content.equals("")) {
-////                    responseInfo.setContent(article.getContent());
+                if (article.getLinkType() == 0){
+                    responseInfo.setUrl(configInfo.getArticleURLPrex()+article.getId());
+                }else{
+                    responseInfo.setUrl(article.getUrl());
+                }
+
+//                String content = article.getContent();
+////                logger.warning("======= : "+responseInfo);
+//                if (content != null && !content.equals("")) {
+//                    responseInfo.setUrl(article.getUrl());
+//                    System.out.println("in if ================");
+//                }else{
+//                    responseInfo.setUrl(configInfo.getArticleURLPrex()+article.getId());
+//                    System.out.println("in else ======================");
 //                }
-//                else responseInfo.setUrl(article.getUrl());
+
 
                 return null;
             }

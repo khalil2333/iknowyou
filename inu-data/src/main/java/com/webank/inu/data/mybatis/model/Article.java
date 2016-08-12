@@ -134,4 +134,20 @@ public class Article {
     public void setLinkType(int linkType) {
         this.linkType = linkType;
     }
+
+    @Override
+    public String toString() {
+        return "Article{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", url='" + url + '\'' +
+                ", degreeMin=" + degreeMin +
+                ", degreeMax=" + degreeMax +
+                ", picUrl='" + picUrl + '\'' +
+                ", content='" + content + '\'' +
+                ", resourceType=" + resourceType +
+                ", linkType=" + linkType +
+                '}';
+    }
 }

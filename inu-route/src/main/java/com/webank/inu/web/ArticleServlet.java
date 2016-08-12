@@ -8,6 +8,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.webank.inu.logic.service.message.IMessageService;
+import com.webank.inu.logic.service.message.SingleArticleInfo;
+import com.webank.inu.logic.service.message.impl.BaseMessageServiceImpl;
+import org.apache.log4j.Logger;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -16,6 +20,10 @@ import org.json.JSONObject;
  */
 public class ArticleServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+
+	private IMessageService messageService = new BaseMessageServiceImpl();
+
+	private Logger logger = Logger.getLogger(ArticleServlet.class);
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -33,8 +41,10 @@ public class ArticleServlet extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		
 		String articleId=request.getParameter("articleId");
-		System.out.println(articleId);
-		
+		logger.warn("articleId ; "+articleId);
+
+		SingleArticleInfo articleInfo = messageService.queryArticleById(Integer.parseInt(articleId));
+		logger.warn("articleInfo : "+articleInfo);
 		String code = "myCode";
 		String msg = "myMsg";
 		String picUrl="http://pic.sc.chinaz.com/files/pic/pic9/201508/apic14052.jpg";
@@ -42,9 +52,9 @@ public class ArticleServlet extends HttpServlet {
 		JSONObject dataJson=new JSONObject();
 		JSONObject msgJson=new JSONObject();
 		try {
-			dataJson.put("title", "myTitle");
-			dataJson.put("content", "myContent");
-			dataJson.put("pic", picUrl);
+			dataJson.put("title", articleInfo.getTitle());
+			dataJson.put("content", articleInfo.getContent());
+			dataJson.put("pic", articleInfo.getPicUrl());
 
 			msgJson.put("data", dataJson);
 			msgJson.put("code", "myCode");

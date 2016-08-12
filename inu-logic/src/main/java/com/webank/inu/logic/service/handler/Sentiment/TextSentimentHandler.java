@@ -40,8 +40,11 @@ public class TextSentimentHandler implements SynPStreamHandler {
         try {
             result = module.call("TextSentiment", params);
             sentimentResult = gson.fromJson(result,SentimentResult.class);
+//            System.out.println("s : "+sentimentResult);
             context.addAttribute(SENTIMENT_SCORE,this.getClass().getName(),sentimentResult.getPositive());
         } catch (Exception e) {
+            System.out.println("in error");
+            e.printStackTrace();
             System.out.println("error..." + e.getMessage());
         }
 
