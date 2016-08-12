@@ -1,5 +1,10 @@
 package com.webank.inu.logic.service.message.impl;
 
+import com.webank.inu.data.mybatis.model.Article;
+import com.webank.inu.data.service.IArticleService;
+import com.webank.inu.data.service.IUserService;
+import com.webank.inu.data.service.imp.ArticleServiceImp;
+import com.webank.inu.data.service.imp.UserServiceImp;
 import com.webank.inu.logic.pstream.context.PStreamContext;
 import com.webank.inu.logic.pstream.handler.StreamFinishListener;
 import com.webank.inu.logic.pstream.process.PStream;
@@ -14,6 +19,10 @@ import com.webank.inu.logic.utils.ConfigInfo;
  */
 public class BaseMessageServiceImpl implements IMessageService {
     private ConfigInfo configInfo = ConfigInfo.getInstance();
+
+    private IArticleService articleService = new ArticleServiceImp();
+
+    private IUserService userService = new UserServiceImp();
 
     public ResponseInfo processMessage(String openId,String message, int responseType) {
         ResponseInfo responseInfo = null;
@@ -58,6 +67,7 @@ public class BaseMessageServiceImpl implements IMessageService {
         Thread thread = new Thread(new Runnable() {
             public void run() {
                 System.out.println("插入数据："+message);
+                userService.insertUserMessage(openId,message,System.currentTimeMillis());
             }
         });
 
@@ -71,7 +81,7 @@ public class BaseMessageServiceImpl implements IMessageService {
     }
 
     protected ResponseInfo processNews(final String openId,final String message){
-        ResponseInfo responseInfo = new ResponseInfo();
+        final ResponseInfo responseInfo = new ResponseInfo();
 
         PStream pStream = new PStream();
 //        pStream.addHandler(new MessagePersistentHandler());
@@ -91,10 +101,16 @@ public class BaseMessageServiceImpl implements IMessageService {
 
                 System.out.println(sentimentScore+" : "+classfiyClass + ":"+classNum);
                 //调用dao获得图文信息
+                Article article = articleService.getArticle(sentimentScore);
+                responseInfo.setTitle(article.getTitle());
+                responseInfo.setDescription(article.getDescription());
+                responseInfo.setUrl(article.getUrl());
 
                 return null;
             }
         });
+
+        System.out.println(responseInfo);
 
         return responseInfo;
     }
