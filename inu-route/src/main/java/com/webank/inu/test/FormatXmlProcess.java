@@ -33,9 +33,8 @@ public class FormatXmlProcess {
         sb.append("]]></Description><PicUrl><![CDATA[").append(picUrl);
         sb.append("]]></PicUrl><Url><![CDATA[").append(url);
         sb.append("]]></Url></item></Articles>");
-        sb.append("<MsgType><![CDATA[news]]></MsgType><Content><![CDATA[");  
-        sb.append(content);  
-        sb.append("]]></Content><FuncFlag>0</FuncFlag></xml>");  
+        sb.append("<MsgType><![CDATA[news]]></MsgType>");
+        sb.append("</xml>");
         return sb.toString();  
     }  
     
@@ -48,9 +47,9 @@ public class FormatXmlProcess {
         sb.append(from);  
         sb.append("]]></FromUserName><CreateTime>");  
         sb.append(date.getTime());  
-        sb.append("</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[");  
-        sb.append(content);  
-        sb.append("]]></Content><FuncFlag>0</FuncFlag></xml>");  
+        sb.append("</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[");
+        sb.append(content);
+        sb.append("</xml>");
         return sb.toString();  
     }
 }  
