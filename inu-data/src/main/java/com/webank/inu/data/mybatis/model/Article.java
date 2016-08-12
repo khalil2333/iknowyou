@@ -10,6 +10,7 @@ public class Article {
     String url;
     double degreeMin;
     double degreeMax;
+    String picUrl;
 
     public int getId() {
         return id;
@@ -57,5 +58,13 @@ public class Article {
 
     public void setDegreeMax(double degreeMax) {
         this.degreeMax = degreeMax;
+    }
+
+    public String getPicUrl() {
+        return picUrl;
+    }
+
+    public void setPicUrl(String picUrl) {
+        this.picUrl = picUrl;
     }
 }

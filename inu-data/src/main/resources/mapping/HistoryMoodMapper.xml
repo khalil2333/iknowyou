@@ -13,6 +13,6 @@
     </select>
 
     <insert id="insertUserMessage" parameterType="com.webank.inu.data.mybatis.model.HistoryMood" >
-        insert into history_mood(open_id, timestamp1, message) values(#{openId}, #{time}, #{message})
+        insert into history_mood(open_id, record_time, message) values(#{openId}, #{time}, #{message})
     </insert>
 </mapper>
