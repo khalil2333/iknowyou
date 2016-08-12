@@ -23,8 +23,8 @@ public class BaseHistoryChatImpl implements IHistoryChat {
         for (HistoryMoodDTO mood : historyMoods){
             ChatInfo chatInfo = new ChatInfo();
             chatInfo.setContent(mood.getMessage());
-            if (mood.getTime() != null){
-                chatInfo.setTimestamp(mood.getTime().getTime());
+            if (mood.getRecordTime() != null){
+                chatInfo.setTimestamp(mood.getRecordTime().getTime());
             }
 
             chatInfos.add(chatInfo);

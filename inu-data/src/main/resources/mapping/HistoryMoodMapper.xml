@@ -4,7 +4,7 @@
     <resultMap id="BaseResultMap" type="com.webank.inu.data.mybatis.model.HistoryMood" >
         <id column="id" property="id" jdbcType="BIGINT" />
         <result column="open_id" property="openId" jdbcType="VARCHAR" />
-        <result column="timestamp" property="timestamp" jdbcType="TIMESTAMP" />
+        <result column="record_time" property="recordTime" jdbcType="TIMESTAMP" />
         <result column="message" property="message" jdbcType="VARCHAR" />
         <result column="user_mood" property="userMood" jdbcType="DOUBLE" />
     </resultMap>
@@ -14,6 +14,6 @@
     </select>
 
     <insert id="insertUserMessage" parameterType="com.webank.inu.data.mybatis.model.HistoryMood" >
-        insert into history_mood(open_id, record_time, message, user_mood) values(#{openId}, #{time}, #{message}, #{userMood})
+        insert into history_mood(open_id, record_time, message, user_mood) values(#{openId}, #{recordTime}, #{message}, #{userMood})
     </insert>
 </mapper>

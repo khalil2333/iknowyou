@@ -6,10 +6,30 @@ import java.sql.Timestamp;
  * Created by potato on 2016/8/11.
  */
 public class HistoryMood {
+
+    /**
+     *主键id
+     */
     public int id;
+
+    /**
+     *用户的openId
+     */
     String openId;
-    Timestamp time;
+
+    /**
+     *消息发送时间
+     */
+    Timestamp recordTime;
+
+    /**
+     *消息内容
+     */
     String message;
+
+    /**
+     *用户情绪值
+     */
     double userMood;
 
     public int getId() {
@@ -28,12 +48,12 @@ public class HistoryMood {
         this.openId = openId;
     }
 
-    public Timestamp getTime() {
-        return time;
+    public Timestamp getRecordTime() {
+        return recordTime;
     }
 
-    public void setTime(Timestamp time) {
-        this.time = time;
+    public void setRecordTime(Timestamp recordTime) {
+        this.recordTime = recordTime;
     }
 
     public String getMessage() {

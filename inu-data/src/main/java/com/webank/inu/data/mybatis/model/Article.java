@@ -4,15 +4,55 @@ package com.webank.inu.data.mybatis.model;
  * Created by potato on 2016/8/11.
  */
 public class Article {
+    
+    /**
+     * 主键id
+     */
     int id;
+
+    /**
+     * 资源标题
+     */
     String title;
+
+    /**
+     * 资源描述
+     */
     String description;
+
+    /**
+     * 资源url
+     */
     String url;
+
+    /**
+     * 度数最小值
+     */
     double degreeMin;
+
+    /**
+     *度数最大值
+     */
     double degreeMax;
+
+    /**
+     *图片URL
+     */
     String picUrl;
+
+    /**
+     *资源内容
+     */
     String content;
+
+    /**
+     *资源类型，0是文章，1是音乐
+     */
     int resourceType;
+
+    /**
+     *链接类型，0是内链，1是外链
+     */
     int linkType;
 
     public int getId() {

@@ -15,7 +15,7 @@ public class TestUserService {
 
     @Test
     public void getHistoryMoodTest() {
-        List<HistoryMoodDTO> historyMoodList = userServiceImp.getHistoryMood("1");
+        List<HistoryMoodDTO> historyMoodList = userServiceImp.getHistoryMood("oALPuwqMm5_YrKSyYBb1C58melvs");
         System.out.println(historyMoodList.size());
     }
 
