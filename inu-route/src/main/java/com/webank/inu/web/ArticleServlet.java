@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
@@ -39,13 +40,19 @@ public class ArticleServlet extends HttpServlet {
 		String picUrl="http://pic.sc.chinaz.com/files/pic/pic9/201508/apic14052.jpg";
 		PrintWriter out = response.getWriter();
 		JSONObject dataJson=new JSONObject();
-		dataJson.put("title", "myTitle");
-		dataJson.put("content", "myContent");
-		dataJson.put("pic", picUrl);
 		JSONObject msgJson=new JSONObject();
-		msgJson.put("data", dataJson);
-		msgJson.put("code", "myCode");
-		msgJson.put("msg", msg);
+		try {
+			dataJson.put("title", "myTitle");
+			dataJson.put("content", "myContent");
+			dataJson.put("pic", picUrl);
+
+			msgJson.put("data", dataJson);
+			msgJson.put("code", "myCode");
+			msgJson.put("msg", msg);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+
 		// out.print(value1 + value2);
 		String json = msgJson.toString();
 		out.print(json);
