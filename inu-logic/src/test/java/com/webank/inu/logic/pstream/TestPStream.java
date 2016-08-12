@@ -54,7 +54,7 @@ public class TestPStream {
         IMessageService messageService = new BaseMessageServiceImpl();
         ResponseInfo responseInfo =
                 messageService.processMessage("adamchen",
-                        "今天又下雨，又打雷，鞋子还湿了，很不开心",
+                        "我很得意",
                         IMessageService.ResponseType.news);
 
         System.out.println(System.currentTimeMillis() - startTime);
