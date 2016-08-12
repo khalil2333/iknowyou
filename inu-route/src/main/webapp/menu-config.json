@@ -26,9 +26,9 @@
             "url": "http://iknowu.qaq.moe/portrait.html"
         }, 
         {
-            "type": "view",
+            "type": "click",
             "name": "历史",
-            "url": "http://iknowu.qaq.moe/history.html"
+            "key": "event_history"
         }
     ]
 }
