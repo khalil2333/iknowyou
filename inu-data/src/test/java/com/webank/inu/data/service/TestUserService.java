@@ -19,8 +19,9 @@ public class TestUserService {
         System.out.println(historyMoodList.size());
     }
 
+    @Test
     public void insertUserMessageTest() {
-        System.out.println(userServiceImp.insertUserMessage("1","1",1L));
+        System.out.println(userServiceImp.insertUserMessage("4","4",10000L));
     }
 
 

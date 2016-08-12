@@ -1,29 +1,82 @@
 package com.webank.inu.data.service.imp;
 
 import com.webank.inu.data.dto.HistoryMoodDTO;
+import com.webank.inu.data.mybatis.model.Article;
+import com.webank.inu.data.mybatis.model.HistoryMood;
 import com.webank.inu.data.service.IUserService;
+import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.io.Reader;
+import java.sql.Timestamp;
+import java.util.*;
 
 /**
  * Created by potato on 2016/8/11.
  */
 public class UserServiceImp implements IUserService {
 
+    private static SqlSessionFactory sqlSessionFactory;
+    private static Reader reader;
+
+    static {
+        try {
+            reader = Resources.getResourceAsReader("mybatis-config.xml");
+            sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public static SqlSessionFactory getSession() {
+        return sqlSessionFactory;
+    }
+
 
     public List<HistoryMoodDTO> getHistoryMood(String openId) {
-        List<HistoryMoodDTO> historyMoodDTOList = new ArrayList<HistoryMoodDTO>();
+        SqlSession session = sqlSessionFactory.openSession();
+        try {
+            List<HistoryMood> historyMoods = session.selectList("getHistoryMood", openId);
+            if(historyMoods!=null){
+                List<HistoryMoodDTO> historyMoodDTOs = new ArrayList<HistoryMoodDTO>();
+
+                for(HistoryMood item : historyMoods) {
+                    HistoryMoodDTO historyMoodDTO = makeHistoryDTO(item);
+                    historyMoodDTOs.add(historyMoodDTO);
+                }
+
+                return historyMoodDTOs;
+            }
+
+        } finally {
+            session.close();
+        }
+        return null;
+    }
+
+    public int insertUserMessage(String openId, String message, Long time) {
+        SqlSession session = sqlSessionFactory.openSession();
+
+        HistoryMood historyMood = new HistoryMood();
+        historyMood.setTime(new Timestamp(time));
+        historyMood.setMessage(message);
+        historyMood.setOpenId(openId);
+
+        try{
+            int result = session.insert("insertUserMessage",historyMood);
+            session.commit();
+            return result;
+        }finally {
+            session.close();
+        }
+    }
+
+    private HistoryMoodDTO makeHistoryDTO(HistoryMood historyMood) {
         HistoryMoodDTO historyMoodDTO = new HistoryMoodDTO();
-        historyMoodDTO.setId(1);
-        historyMoodDTO.setMessage("123");
-        historyMoodDTO.setTime(123L);
-        historyMoodDTOList.add(historyMoodDTO);
-        return historyMoodDTOList;
-    }
+        historyMoodDTO.setMessage(historyMood.getMessage());
+        historyMoodDTO.setTime(historyMood.getTime());
 
-    public boolean insertUserMessage(String openId, String message, Long time) {
-        return true;
+        return historyMoodDTO;
     }
-
 }
