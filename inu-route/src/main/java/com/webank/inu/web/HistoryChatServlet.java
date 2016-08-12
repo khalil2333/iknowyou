@@ -38,7 +38,6 @@ public class HistoryChatServlet extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();
 		JSONArray dataArray=new JSONArray();
-
 		IHistoryChat historyChat = new BaseHistoryChatImpl();
         List<ChatInfo> chatInfos = historyChat.queryHistoryChats("aaaaa");
 
