@@ -4,7 +4,10 @@
     var list = document.querySelector(".list");
     var item = list.querySelector(".item");
 
-    XHR.get("http://iknowu.qaq.moe/HistoryChatServlet", function(event) {
+    var pair = document.location.search.match("openId[^&]*");
+    var openId = pair[0].split("=")[1];
+    var url = "http://iknowu.qaq.moe/history.html?openId=" + openId;
+    XHR.get(url, function (event) {
         /* extract data */
         var resp = JSON.parse(event.target.responseText);
         for (var i = 0; i < resp.data.length; ++i) {
