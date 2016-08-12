@@ -36,4 +36,8 @@ public class ConfigInfo extends Properties {
     public String getWXDevelopName(){
         return getProperty("WX_DeveloperName");
     }
+
+    public String getArticleURLPrex(){
+        return getProperty("article.url.prex");
+    }
 }

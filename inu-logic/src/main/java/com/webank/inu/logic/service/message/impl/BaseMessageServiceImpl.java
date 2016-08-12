@@ -12,6 +12,7 @@ import com.webank.inu.logic.service.handler.Classify.TextClassifyHandler;
 import com.webank.inu.logic.service.handler.Sentiment.TextSentimentHandler;
 import com.webank.inu.logic.service.message.IMessageService;
 import com.webank.inu.logic.service.message.ResponseInfo;
+import com.webank.inu.logic.service.message.SingleArticleInfo;
 import com.webank.inu.logic.utils.ConfigInfo;
 
 /**
@@ -53,7 +54,7 @@ public class BaseMessageServiceImpl implements IMessageService {
         }
 
         //异步插入数据
-        asynInsertMsg(openId,message);
+//        asynInsertMsg(openId,message);
 
         //公共信息部分
         responseInfo.setToUserName(openId);
@@ -63,7 +64,11 @@ public class BaseMessageServiceImpl implements IMessageService {
         return responseInfo;
     }
 
-    protected void asynInsertMsg(final String openId, final String message){
+    public SingleArticleInfo queryArticleById(String articleId) {
+        return null;
+    }
+
+    protected void asynInsertMsg(final String openId, final String message,float sentimentScore){
         Thread thread = new Thread(new Runnable() {
             public void run() {
                 System.out.println("插入数据："+message);
@@ -100,18 +105,23 @@ public class BaseMessageServiceImpl implements IMessageService {
                 int classNum = (Integer) context.getAttribute(TextClassifyHandler.CLASSIFY_NUM);
 
                 System.out.println(sentimentScore+" : "+classfiyClass + ":"+classNum);
+                //异步插入数据
+                asynInsertMsg(openId,message,sentimentScore);
                 //调用dao获得图文信息
                 Article article = articleService.getArticle(sentimentScore);
                 responseInfo.setTitle(article.getTitle());
                 responseInfo.setDescription(article.getDescription());
-                responseInfo.setUrl(article.getUrl());
+                responseInfo.setPicUrl(article.getPicUrl());
+                String content = article.getContent();
+                if (content == null || content.equals("")) {
+                    responseInfo.setUrl(configInfo.getArticleURLPrex()+article.getId());
+//                    responseInfo.setContent(article.getContent());
+                }
+                else responseInfo.setUrl(article.getUrl());
 
                 return null;
             }
         });
-
-        System.out.println(responseInfo);
-
         return responseInfo;
     }
 

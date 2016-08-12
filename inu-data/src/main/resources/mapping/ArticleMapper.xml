@@ -9,6 +9,7 @@
         <result column="degree_max" property="degreeMax" jdbcType="DOUBLE" />
         <result column="url" property="url" jdbcType="VARCHAR" />
         <result column="pic_url" property="picUrl" jdbcType="VARCHAR" />
+        <result column="content" property="content" jdbcType="VARCHAR"/>
     </resultMap>
 
 
