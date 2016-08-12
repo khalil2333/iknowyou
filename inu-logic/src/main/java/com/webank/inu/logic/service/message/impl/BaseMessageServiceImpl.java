@@ -110,32 +110,35 @@ public class BaseMessageServiceImpl implements IMessageService {
         pStream.synFinish(new StreamFinishListener() {
             public Object actionFinish(PStreamContext context) {
                 float sentimentScore = (Float) context.getAttribute(TextSentimentHandler.SENTIMENT_SCORE);
-                String classfiyClass = (String) context.getAttribute(TextClassifyHandler.CLASSIFY_CLASS);
-                int classNum = (Integer) context.getAttribute(TextClassifyHandler.CLASSIFY_NUM);
+//                String classfiyClass = (String) context.getAttribute(TextClassifyHandler.CLASSIFY_CLASS);
+//                int classNum = (Integer) context.getAttribute(TextClassifyHandler.CLASSIFY_NUM);
 
-                System.out.println(sentimentScore+" : "+classfiyClass + ":"+classNum);
+//                System.out.println(sentimentScore+" : "+classfiyClass + ":"+classNum);
                 //异步插入数据
                 asynInsertMsg(openId,message,sentimentScore);
                 //调用dao获得图文信息
                 Article article = articleService.getArticle(sentimentScore);
+                logger.warning("-==- article : "+article);
 //                logger.warning("+++++++ : "+article);
                 responseInfo.setTitle(article.getTitle());
                 responseInfo.setDescription(article.getDescription());
                 responseInfo.setPicUrl(article.getPicUrl());
-                String content = article.getContent();
-//                logger.warning("======= : "+responseInfo);
-                logger.warning("==== content " + content);
-                if (content != null && !content.equals("")) {
-                    responseInfo.setUrl(article.getUrl());
-                    System.out.println("in if ================");
-                }else{
+                if (article.getLinkType() == 0){
                     responseInfo.setUrl(configInfo.getArticleURLPrex()+article.getId());
-                    System.out.println("in else ======================");
+                }else{
+                    responseInfo.setUrl(article.getUrl());
                 }
-//                if (content.equals("") || content == null) {
-////                    responseInfo.setContent(article.getContent());
+
+//                String content = article.getContent();
+////                logger.warning("======= : "+responseInfo);
+//                if (content != null && !content.equals("")) {
+//                    responseInfo.setUrl(article.getUrl());
+//                    System.out.println("in if ================");
+//                }else{
+//                    responseInfo.setUrl(configInfo.getArticleURLPrex()+article.getId());
+//                    System.out.println("in else ======================");
 //                }
-//                else
+
 
                 return null;
             }
