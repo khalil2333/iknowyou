@@ -15,12 +15,6 @@
             appendItem(item.datetime, item.content);
         }
 
-        /* update ui */
-        document.title = "历史心情";
-        list.classList.toggle("hide");
-
-        var loadingToast = document.querySelector("#loadingToast");
-        loadingToast.classList.toggle("hide");
     });
 
     function appendItem(datetime, content) {
