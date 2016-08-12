@@ -2,6 +2,8 @@ package com.webank.inu.web;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -25,6 +27,8 @@ public class HistoryChatServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	private static Logger logger = Logger.getLogger(HistoryChatServlet.class);
+
+	private String dataFormat = "yyyy-MM-dd HH:mm:ss";
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -33,6 +37,12 @@ public class HistoryChatServlet extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
+
+	private String transferLongToDate(String dateFormat,Long millSec){
+		SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
+		Date date= new Date(millSec);
+		return sdf.format(date);
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -50,7 +60,7 @@ public class HistoryChatServlet extends HttpServlet {
         for (ChatInfo info : chatInfos) {
         	JSONObject dataJson=new JSONObject();
 			try {
-				dataJson.put("datetime", info.getTimestamp());
+				dataJson.put("datetime", transferLongToDate(dataFormat,info.getTimestamp()));
 				dataJson.put("content", info.getContent());
 			} catch (JSONException e) {
 				e.printStackTrace();
