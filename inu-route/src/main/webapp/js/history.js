@@ -6,7 +6,7 @@
 
     var pair = document.location.search.match("openId[^&]*");
     var openId = pair[0].split("=")[1];
-    var url = "http://iknowu.qaq.moe/history.html?openId=" + openId;
+    var url = "http://iknowu.qaq.moe/HistoryChatServlet?openId=" + openId;
     XHR.get(url, function (event) {
         /* extract data */
         var resp = JSON.parse(event.target.responseText);
