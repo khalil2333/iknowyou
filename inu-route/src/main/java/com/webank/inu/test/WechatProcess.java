@@ -23,7 +23,7 @@ public class WechatProcess {
         if("text".endsWith(xmlEntity.getMsgType())){  
             result = xmlEntity.getContent();  
         }  
-          
+        
         IMessageService messageService = new BaseMessageServiceImpl();
         ResponseInfo responseInfo =
                 messageService.processMessage(xmlEntity.getFromUserName(), result,
