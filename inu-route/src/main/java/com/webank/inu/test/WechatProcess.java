@@ -1,54 +1,76 @@
 package com.webank.inu.test;
 
+import com.webank.inu.constant.Event;
+import com.webank.inu.logic.service.history.ChatInfo;
+import com.webank.inu.logic.service.history.IHistoryChat;
+import com.webank.inu.logic.service.history.impl.BaseHistoryChatImpl;
 import com.webank.inu.logic.service.message.IMessageService;
 import com.webank.inu.logic.service.message.ResponseInfo;
 import com.webank.inu.logic.service.message.impl.BaseMessageServiceImpl;
 
-/**
- * 微信xml消息处理流程逻辑类 
- * @author pamchen-1 
- * 
- */  
-public class WechatProcess {  
-    /** 
-     * 解析处理xml、获取智能回复结果（通过图灵机器人api接口） 
-     * @param xml 接收到的微信数据 
-     * @return  最终的解析结果（xml格式数据） 
-     */  
-    public String processWechatMag(String xml){  
-        /** 解析xml数据 */  
-//    	System.out.println("xml : "+xml);
-        ReceiveXmlEntity xmlEntity = new ReceiveXmlProcess().getMsgEntity(xml);  
-          
-        /** 以文本消息为例，调用图灵机器人api接口，获取回复内容 */  
-        String result = "";  
-        if("text".endsWith(xmlEntity.getMsgType())){  
-            result = new TulingApiProcess().getTulingResult(xmlEntity.getContent());  
-        }  
-          
-        /** 此时，如果用户输入的是“你好”，在经过上面的过程之后，result为“你也好”类似的内容  
-         *  因为最终回复给微信的也是xml格式的数据，所有需要将其封装为文本类型返回消息 
-         * */
-        IMessageService messageService = new BaseMessageServiceImpl();
-        ResponseInfo responseInfo =
-                messageService.processMessage(xmlEntity.getFromUserName(), result,
-                        IMessageService.ResponseType.news);
-        //测试数据
-//        String title="test";
-//        String description="d";
-//        String picUrl="http://pic.sc.chinaz.com/files/pic/pic9/201508/apic14052.jpg";
-//        String url="http://docs.spring.io/spring-batch/reference/html/";
-//        responseInfo.setTitle(title);
-//        responseInfo.setDescription(description);
-//        responseInfo.setPicUrl(picUrl);
-//        responseInfo.setUrl(url);
-        //测试数据
+import java.io.PrintWriter;
+import java.util.List;
 
-        result = new FormatXmlProcess().formatXmlNewsAnswer(
-                responseInfo.getToUserName(), xmlEntity.getToUserName(), responseInfo.getContent(),
-        		responseInfo.getTitle(),responseInfo.getDescription(),
-                responseInfo.getPicUrl(),responseInfo.getUrl());
-          
-        return result;  
-    }  
-}  
+import org.apache.log4j.Logger;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+/**
+ * 微信xml消息处理流程逻辑类
+ * 
+ */
+public class WechatProcess {
+	private static Logger logger = Logger.getLogger(WechatProcess.class);
+
+	/**
+	 * 解析处理xml、拼装结果xml
+	 * 
+	 * @param xml
+	 *            接收到的微信数据
+	 * @return 最终的解析结果（xml格式数据）
+	 */
+	public String processWechatMag(String xml) {
+		/** 解析xml数据 */
+		// System.out.println("xml : "+xml);
+		logger.warn("log : " + xml);
+
+		ReceiveXmlEntity xmlEntity = new ReceiveXmlProcess().getMsgEntity(xml);
+
+		String result = "";
+		if ("text".endsWith(xmlEntity.getMsgType())) {
+			IMessageService messageService = new BaseMessageServiceImpl();
+			ResponseInfo responseInfo = messageService.processMessage(xmlEntity.getFromUserName(), result,
+					IMessageService.ResponseType.news);
+			/**
+			 * 封装为文本类型,作为xml结果
+			 */
+			result = new FormatXmlProcess().formatXmlNewsAnswer(responseInfo.getToUserName(), xmlEntity.getToUserName(),
+					responseInfo.getContent(), responseInfo.getTitle(), responseInfo.getDescription(),
+					responseInfo.getPicUrl(), responseInfo.getUrl());
+			// 测试数据
+			// String title="test";
+			// String description="d";
+			// String
+			// picUrl="http://pic.sc.chinaz.com/files/pic/pic9/201508/apic14052.jpg";
+			// String url="http://docs.spring.io/spring-batch/reference/html/";
+			// responseInfo.setTitle(title);
+			// responseInfo.setDescription(description);
+			// responseInfo.setPicUrl(picUrl);
+			// responseInfo.setUrl(url);
+			// 测试数据
+		} else if ("event".endsWith(xmlEntity.getMsgType())) {
+			if ("CLICK".endsWith(xmlEntity.getEvent())) {
+				if ("event_history".endsWith(xmlEntity.getEventKey())) {
+					String title="历史心情";
+					String Url="http://iknowu.qaq.moe/history.html";
+					//String historyChat=getHistoryChat(xmlEntity.getFromUserName());
+					result=new FormatXmlProcess().formatXmlEventClickAnswer(xmlEntity.getFromUserName(), 
+							xmlEntity.getToUserName(),title , Url);
+				}
+			}
+		}
+		return result;
+	}
+
+}

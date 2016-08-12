@@ -27,14 +27,19 @@
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
         </dependency>
-
+<!--
         <dependency>
-            <groupId>com.qcloud.sdk</groupId>
-            <artifactId>qcloud-jar</artifactId>
-            <version>2.0</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/../thirdlib/qcloud-java.jar</systemPath>
-        </dependency>
+            <groupId>qcloud</groupId>
+            <artifactId>java</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>com.qcloud.sdk</groupId>-->
+            <!--<artifactId>qcloud-jar</artifactId>-->
+            <!--<version>2.0</version>-->
+            <!--<scope>system</scope>-->
+            <!--<systemPath>${project.basedir}/../thirdlib/qcloud-java.jar</systemPath>-->
+        <!--</dependency>-->
 
         <dependency>
             <groupId>junit</groupId>

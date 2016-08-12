@@ -4,7 +4,6 @@ import java.util.Date;
 
 /** 
  * 封装最终的xml格式结果 
- * @author pamchen-1 
  * 
  */  
 public class FormatXmlProcess {  
@@ -33,9 +32,8 @@ public class FormatXmlProcess {
         sb.append("]]></Description><PicUrl><![CDATA[").append(picUrl);
         sb.append("]]></PicUrl><Url><![CDATA[").append(url);
         sb.append("]]></Url></item></Articles>");
-        sb.append("<MsgType><![CDATA[news]]></MsgType><Content><![CDATA[");  
-        sb.append(content);  
-        sb.append("]]></Content><FuncFlag>0</FuncFlag></xml>");  
+        sb.append("<MsgType><![CDATA[news]]></MsgType>");
+        sb.append("</xml>");
         return sb.toString();  
     }  
     
@@ -48,9 +46,29 @@ public class FormatXmlProcess {
         sb.append(from);  
         sb.append("]]></FromUserName><CreateTime>");  
         sb.append(date.getTime());  
-        sb.append("</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[");  
-        sb.append(content);  
-        sb.append("]]></Content><FuncFlag>0</FuncFlag></xml>");  
+        sb.append("</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[");
+        sb.append(content);
+        sb.append("</xml>");
         return sb.toString();  
     }
+
+	public String formatXmlEventClickAnswer(String toUserName, String fromUserName, String title, String Url) {
+		StringBuffer sb = new StringBuffer();  
+        Date date = new Date();  
+        sb.append("<xml><ToUserName><![CDATA[");  
+        sb.append(toUserName);  
+        sb.append("]]></ToUserName><FromUserName><![CDATA[");  
+        sb.append(fromUserName);  
+        sb.append("]]></FromUserName><CreateTime>");  
+        sb.append(date.getTime()).append("</CreateTime>"); 
+        sb.append("<ArticleCount>1</ArticleCount>");
+        sb.append("<Articles><item><Title><![CDATA[");
+        sb.append(title);
+        sb.append("]]></Title> ");
+        sb.append("<Url><![CDATA[").append(Url);
+        sb.append("]]></Url></item></Articles>");
+        sb.append("<MsgType><![CDATA[news]]></MsgType>");
+        sb.append("</xml>");
+		return sb.toString();
+	}
 }  
