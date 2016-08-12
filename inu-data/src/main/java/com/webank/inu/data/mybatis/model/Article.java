@@ -12,6 +12,8 @@ public class Article {
     double degreeMax;
     String picUrl;
     String content;
+    int resourceType;
+    int linkType;
 
     public int getId() {
         return id;
@@ -75,5 +77,21 @@ public class Article {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public int getResourceType() {
+        return resourceType;
+    }
+
+    public void setResourceType(int resourceType) {
+        this.resourceType = resourceType;
+    }
+
+    public int getLinkType() {
+        return linkType;
+    }
+
+    public void setLinkType(int linkType) {
+        this.linkType = linkType;
     }
 }

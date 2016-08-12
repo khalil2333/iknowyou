@@ -80,6 +80,8 @@ public class ArticleServiceImp implements IArticleService {
         articleDTO.setDescription(article.getDescription());
         articleDTO.setPicUrl(article.getPicUrl());
         articleDTO.setContent(article.getContent());
+        articleDTO.setResourceType(article.getResourceType());
+        articleDTO.setLinkType(article.getLinkType());
 
         return articleDTO;
     }

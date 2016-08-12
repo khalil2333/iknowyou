@@ -10,7 +10,8 @@
         <result column="url" property="url" jdbcType="VARCHAR" />
         <result column="pic_url" property="picUrl" jdbcType="VARCHAR" />
         <result column="content" property="content" jdbcType="VARCHAR"/>
-
+        <result column="resource_type" property="resourceType" jdbcType="INTEGER" />
+        <result column="link_type" property="linkType" jdbcType="INTEGER" />
     </resultMap>
 
 

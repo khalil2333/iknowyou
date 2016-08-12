@@ -18,7 +18,7 @@ public class TestArticleService {
 
     @Test
     public void getArticleByIdTest() {
-        ArticleDTO articleDTO = articleServiceImp.getArticleById(1);
+        ArticleDTO articleDTO = articleServiceImp.getArticleById(45);
         System.out.println("id:"+ articleDTO.getId() + ",内容:" + articleDTO.getContent());
     }
 
